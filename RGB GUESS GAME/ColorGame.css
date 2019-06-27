@@ -1,6 +1,7 @@
 body{
     background: black;
     font-weight: 700;
+    color:white;
 }
 nav{
 
@@ -13,9 +14,12 @@ nav{
     border-radius: 20%;
     margin:1.66%;
     float:left;
+    transition: background-color 0.7s;
+    
 }
 .container{
     max-width: 600px;
+    margin: 20px auto;
 }
 p{
     margin: 0;
@@ -29,9 +33,10 @@ nav p {
 
 .center{
     
-        width: 30%;
-        display: inline-flex;
-        justify-content: space-evenly;
+    width: 30%;
+    display: inline-flex;
+    justify-content: space-evenly;
+    
 }
 
 .selected{
@@ -42,4 +47,5 @@ nav p {
     background-color:  rgb(76, 76, 230);
     transform: scale(1.1);
     color: white;
+    transition: all 0.2s;
 }
