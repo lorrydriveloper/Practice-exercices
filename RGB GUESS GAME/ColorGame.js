@@ -55,8 +55,8 @@ function selectDifficulty() {
 
 }
 function randomNumber(){
-    /* return a random integer 0 - 999 */
-    return Math.floor(Math.random() * 1000);
+    /* return a random integer 0 - 255 */
+    return Math.floor(Math.random() * 256);
 }
 
 function getRandomValueRGB() {
@@ -65,20 +65,10 @@ function getRandomValueRGB() {
         with values between 0 an 255 using the function 
         randomNumber */
 
-    let red;
-    let green;
-    let blue;
+    let red = randomNumber();
+    let blue = randomNumber();
+    let green = randomNumber();
 
-    while (true) {
-
-        red = randomNumber();
-        blue = randomNumber();
-        green = randomNumber();
-
-        if (green < 255 && red < 255 && blue < 255) {
-            break;
-        }
-    }
     return `RGB(${red}, ${green}, ${blue})`
 }
 function randomColors(list) {
@@ -139,7 +129,7 @@ function play() {
     //reset styles and game over to start a new game.
     gameOver = false 
     display.innerText = ''
-    jumbotron.style.backgroundColor = '#rgb(76, 76, 230)'
+    jumbotron.style.backgroundColor = 'rgb(76, 76, 230)'
 }
 
 /////////////////////////////////////////////////////////////////
