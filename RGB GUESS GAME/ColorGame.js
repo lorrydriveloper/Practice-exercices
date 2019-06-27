@@ -7,12 +7,13 @@ var difficulty = document.querySelectorAll('div.center:nth-child(3) p');
 var container = document.querySelector('div.container');
 var display = document.querySelector('div.center:nth-child(2) p');
 var jumbotron =document.querySelector('div.jumbotron');
+
 ///////////////////////////////////
 
 // Function declaration Zone //
 
 function createDivs(difficulty) {
-//   Create dinamicaly divs in function of dificulty
+//   Create dynamically divs in function of difficulty
 
     while (container.firstChild) {
         container.removeChild(container.firstChild);
@@ -69,9 +70,11 @@ function getRandomValueRGB() {
     let blue;
 
     while (true) {
-        green = randomNumber();
-        blue = randomNumber();
+
         red = randomNumber();
+        blue = randomNumber();
+        green = randomNumber();
+
         if (green < 255 && red < 255 && blue < 255) {
             break;
         }
@@ -106,6 +109,9 @@ function checkColor() {
         display.innerText = 'Correct'
         gameOver = true
         jumbotron.style.backgroundColor = randomBoxRGB
+        for (const box of boxes) {
+            box.style.backgroundColor = randomBoxRGB;
+        }
         }
         else{
             display.innerText = 'Try Again'
@@ -119,7 +125,7 @@ function checkColor() {
 function play() {
     //  this function make work all the previous functions.
 
-    createDivs(checkDifficulty());  //create divs dynamically.
+    createDivs(checkDifficulty());  //create divs dynamically depending of difficult selected.
     randomColors(boxes); //assign random color to divs.
     randomBox = selectRandomBox(boxes.length) //select a random box to be the winner.
 
@@ -133,7 +139,7 @@ function play() {
     //reset styles and game over to start a new game.
     gameOver = false 
     display.innerText = ''
-    jumbotron.style.backgroundColor = '#e9ecef'
+    jumbotron.style.backgroundColor = '#rgb(76, 76, 230)'
 }
 
 /////////////////////////////////////////////////////////////////

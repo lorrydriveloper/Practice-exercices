@@ -1,9 +1,10 @@
 body{
     background: black;
+    font-weight: 700;
 }
 nav{
 
-    background-color: rgb(76, 76, 230);
+    background-color:white;
 }
 .box{
     width: 30%;
@@ -19,6 +20,13 @@ nav{
 p{
     margin: 0;
 }
+nav p {
+    color: rgb(76, 76, 230);
+}
+.jumbotron.text-center{
+    background-color: rgb(76, 76, 230);
+}
+
 .center{
     
         width: 30%;
@@ -27,9 +35,11 @@ p{
 }
 
 .selected{
-    background-color: white;
+    background-color: rgb(76, 76, 230);
+    color: white;
 }
 .center p:hover{
-    background-color: white;
+    background-color:  rgb(76, 76, 230);
     transform: scale(1.1);
+    color: white;
 }
