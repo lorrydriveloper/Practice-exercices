@@ -1,0 +1,62 @@
+body{
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 100%);
+}
+.container{
+    width:450px;
+    margin: auto;
+    background-color: white;
+    overflow-x: auto;
+}
+.header{
+    background-color: blue;
+    font-size: 2rem;
+    padding: 2%;
+    color: white;
+}
+
+.header span{
+    float: right;
+    font-size: 25px;
+}
+input[type='text']{
+    width: 100%;
+    border: 0;
+    background-color: lightgrey;
+    font-size: 1rem;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    font-size: 1.3rem;
+    cursor: default;
+}
+li:before{
+        content: "\f2ed";
+        font-family: 'Font Awesome 5 Free';
+        display: inline-block;
+        margin-left: -40px;
+        width: 20px;
+        background-color: red;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+}
+li:hover::before{
+    margin-left: 0;
+    transition: margin 700ms;
+
+    
+}
+
+
+li:nth-child(even){
+    background-color:rgb(168, 165, 165);
+}
+
+
+
