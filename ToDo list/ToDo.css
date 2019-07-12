@@ -17,12 +17,14 @@ body{
 .header span{
     float: right;
     font-size: 25px;
+    cursor: pointer;
 }
 input[type='text']{
-    width: 100%;
+    width: 95%;
     border: 0;
     background-color: lightgrey;
     font-size: 1rem;
+    padding: 10px;
 }
 
 ul{
@@ -34,6 +36,7 @@ ul{
 li{
     font-size: 1.3rem;
     cursor: default;
+    
 }
 li:before{
         content: "\f2ed";
@@ -45,18 +48,20 @@ li:before{
         padding: 10px;
         margin-right: 10px;
         cursor: pointer;
+        transition: margin 700ms;
 }
 li:hover::before{
     margin-left: 0;
-    transition: margin 700ms;
 
     
 }
-
 
 li:nth-child(even){
     background-color:rgb(168, 165, 165);
 }
 
-
+.done{
+    opacity: 0.8;
+    text-decoration: line-through;
+}
 
