@@ -22,7 +22,7 @@ $('ul').on('click', 'li', function (e) {
      the after element set at 40 px because we move in css -40px and in hover we return
      it at its natural place.*/
     if (e.offsetX > 40) { 
-       $(this).addClass('done')
+       $(this).toggleClass('done')
     }
      else{
        // click on :before element
