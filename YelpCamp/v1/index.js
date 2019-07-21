@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.set('view engine','ejs');
-// app.use(static('statics'))
+app.use(express.static('statics'))
 
 app.get('/', (req, res)=>{
     res.render('home')
