@@ -1,0 +1,13 @@
+<% include partial/header %>
+
+<h1>This is the camps Grounds page</h1>
+
+
+<%listOfCampsGrounds.forEach(campsGround => {%>
+    <div>
+        <h4><%= campsGround.name%></h4>
+        <img src="<%= campsGround.img %>" alt="campsgound img">
+    </div>
+<%});%>
+
+<% include partial/footer %>
