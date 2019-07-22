@@ -1,3 +1,13 @@
 body{
-    background-color: aqua;
+    background-color: whitesmoke;
+    padding-top: 25px;
 }
+
+.card-img-top{
+    height: 225px!important;
+    object-fit: cover;
+ }
+ .card{
+     margin-bottom: 1rem;
+ }
+ 

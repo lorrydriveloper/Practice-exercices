@@ -1,15 +1,28 @@
 <% include partials/header %>
+<div class="container">
+    <div class="jumbotron">
+    <h1 class="display-3"> <i class="fas fa-campground    "></i> CampGrounds</h1>
+    <p class="lead">Our best selection of campgrounds </p>
+    <hr class="my-2">
+    <p>You can see our luxury campgrounds and add new spot if you know excelents ones</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="campsgrounds/new" role="button">Add new campground</i></a>
+    </p>
+</div>
 
-<h1>This is the camps Grounds page</h1>
-
-<a href="campsgrounds/new">Add new campground<i class="fas fa-campground    "></i></a>
-
-
-<%listOfCampsGrounds.forEach(campsGround => {%>
-    <div>
-        <h4><%= campsGround.name%></h4>
-        <img src="<%= campsGround.img %>" alt="campsgound img">
+<div class="row">
+    <%listOfCampsGrounds.forEach(campsGround => {%>
+    <div class="col-lg-4 col-sm-6">
+        <div class="card ">
+            <img class="card-img-top" src="<%= campsGround.img %>" alt="CampGround image">
+            <div class="card-body text-center">
+                <h4 class="card-title"><%= campsGround.name%></h4>
+                <p class="card-text">Text</p>
+            </div>
+        </div>
     </div>
 <%});%>
+</div>
+</div>
 
 <% include partials/footer %>
