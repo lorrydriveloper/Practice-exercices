@@ -6,17 +6,17 @@
     <hr class="my-2">
     <p>You can see our luxury campgrounds and add new spot if you know excelents ones</p>
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="campsgrounds/new" role="button">Add new campground</i></a>
+        <a class="btn btn-primary btn-lg" href="campgrounds/new" role="button">Add new campground</i></a>
     </p>
 </div>
 
 <div class="row">
-    <%listOfCampsGrounds.forEach(campsGround => {%>
+    <%listOfCampgrounds.forEach(campground => {%>
     <div class="col-lg-4 col-sm-6">
         <div class="card ">
-            <img class="card-img-top" src="<%= campsGround.img %>" alt="CampGround image">
+            <img class="card-img-top" src="<%= campground.img %>" alt="CampGround image">
             <div class="card-body text-center">
-                <h4 class="card-title"><%= campsGround.name%></h4>
+                <h4 class="card-title"><%= campground.name%></h4>
                 <p class="card-text">Text</p>
             </div>
         </div>
