@@ -1,0 +1,19 @@
+body{
+    background-color: whitesmoke;
+}
+.container{
+    margin-top: 4rem;
+}
+.container_form{
+    width: 50vh;
+    margin: auto;
+}
+
+.card-img-top{
+    height: 225px!important;
+    object-fit: cover;
+}
+.card{
+    margin-bottom: 1rem;
+}
+ 
