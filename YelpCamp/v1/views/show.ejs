@@ -1,0 +1,11 @@
+<% include partials/header %>
+
+<div class="container">
+    <h1 class="display-4"><%= campground.name%></h1>
+    <img src="<%= campground.imgUrl%>" class="img-fluid rounded-top" alt="">
+    <blockquote class="blockquote">
+        <p class="mb-0"><%=campground.description%></p>
+    </blockquote>
+</div>
+
+<% include partials/footer %>
