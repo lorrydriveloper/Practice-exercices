@@ -1,7 +1,7 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const express = require('express'),
+      app = express(),
+      bodyParser = require('body-parser'),
+      mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true }).
   catch(error => handleError(error));
@@ -14,8 +14,9 @@ db.once('open', function() {
 });
 
 var campgroundSchema = new mongoose.Schema({
-    name:String,
-    imgUrl:String,
+    name: String,
+    imgUrl: String,
+    description: String,
     });
 
     var Campground = mongoose.model('Campground', campgroundSchema);
@@ -40,11 +41,29 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/campgrounds', (req, res)=>{
+    let textTruncate = function(str, length, ending) {
+        if (str == undefined) {
+          return 'Upps not description ...Yet'
+        }
+        if (ending == null) {
+          ending = '...';
+        }
+        if (str.length > length) {
+          return str.substring(0, length - ending.length) + ending;
+        } else {
+          return str;
+        }
+      };
+
+    let context = {
+        textTruncate: textTruncate,
+    }  
     Campground.find({}, (err, campgrounds)=>{
         if (err) {
             console.log(err);
         } else {
-            res.render('campgrounds',{listOfCampgrounds:campgrounds});
+            context.listOfCampgrounds = campgrounds
+            res.render('campgrounds',context);
         }
     })
     
@@ -54,6 +73,7 @@ app.post('/campgrounds',(req, res)=>{
     let newCamp = {
         name:req.body.name,
         imgUrl: req.body.image,
+        description: req.body.description
     }
     Campground.create(newCamp,err=>{
         if (err) {
@@ -68,6 +88,18 @@ app.post('/campgrounds',(req, res)=>{
 
 app.get('/campgrounds/new', (req, res)=>{
     res.render('new')
+});
+
+app.get('/campgrounds/:id', (req, res) => {
+    
+    Campground.findById(req.params.id,(err, DB_response)=>{
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('show',{campground:DB_response})
+        }
+    })
+    
 });
 
 
