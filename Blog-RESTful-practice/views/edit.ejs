@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+<div class="container">
+   <form action="/blog/<%=post.id%>?_method=PUT" method="Post">
+    <div class="form-group">
+      <label for="title">Post Title</label>
+      <input value='<%= post.title%>' type="text" name="title" id="title" class="form-control" placeholder="Write your Post Title" aria-describedby="Title of your Post">
+      <small id="Title of your Post" class="text-muted">Your Post Title to be show</small>
+    </div>
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input value='<%= post.image%>' type="text" name="image" id="image" class="form-control" placeholder="Link your external image" aria-describedby="Your link to a image">
+      <small id="Your link to a image" class="text-muted">The link to the image to be show</small>
+    </div>
+    <div class="form-group">
+      <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+      <label for="content">Your Post Content</label>
+      <textarea  class="form-control" name="content" id="content" rows="5"><%= post.content%></textarea>
+      <script>
+        CKEDITOR.replace( 'content' );
+    </script>
+    </div>
+    <button type="submit" class="btn btn-secondary btn-block">Submit</button> 
+</form>
+</div>
+
+
+<% include partials/footer %>

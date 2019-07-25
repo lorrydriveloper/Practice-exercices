@@ -1,0 +1,17 @@
+.container{
+    width: 50vw !important;
+}
+.container-fluid{
+    margin-top: 50px;
+}
+.card-img-right{
+    width: 20vw;
+    height: 13rem;
+}
+#post_image{
+    position: relative;
+    width: 100%;
+}
+a{
+    color: inherit;
+}
