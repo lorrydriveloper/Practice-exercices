@@ -14,10 +14,11 @@
     <%listOfCampgrounds.forEach(campground => {%>
     <div class="col-lg-4 col-sm-6">
         <div class="card ">
-            <img class="card-img-top" src="<%= campground.img %>" alt="CampGround image">
+            <img class="card-img-top" src="<%= campground.imgUrl %>" alt="CampGround image">
             <div class="card-body text-center">
                 <h4 class="card-title"><%= campground.name%></h4>
-                <p class="card-text">Text</p>
+                <p class="card-text"><%= textTruncate(campground.description,50)%></p>
+                <a href="/campgrounds/<%=campground.id%>" class="btn btn-primary">Visit Campground Page</a>
             </div>
         </div>
     </div>
