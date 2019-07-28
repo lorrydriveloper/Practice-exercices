@@ -3,6 +3,9 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
       Campground = require('./models/campground')
+      seeDB = require('./seed')
+
+seeDB();
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true }).
   catch(error => handleError(error));
