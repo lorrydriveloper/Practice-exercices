@@ -1,0 +1,31 @@
+body{
+    background-color: whitesmoke;
+}
+
+figcaption{
+    margin-top: 9px;
+    font-size: larger;
+}
+
+.container{
+    margin-top: 4rem;
+}
+.container_form{
+    width: 50vh;
+    margin: auto;
+}
+
+.card-img-top{
+    height: 225px!important;
+    object-fit: cover;
+}
+.card{
+    margin-bottom: 1rem;
+}
+.img-thumbnail {
+    padding: 0;
+}
+.img-thumbnail .img-fluid{
+    width: 100%
+}
+ 

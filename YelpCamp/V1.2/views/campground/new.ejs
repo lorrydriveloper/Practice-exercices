@@ -1,0 +1,31 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h2 class="text-center">Add a new Campground</h2>
+    <div class='container_form'>
+        <form action="/campgrounds" method="post">
+            <div class="form-group">
+            <label for="name">The Name of your Campground</label>
+            <input type="text" class="form-control" name="name" id="name" aria-describedby="Name of campGround" placeholder="Add your CampGround">
+            <small id="Name of campGround" class="form-text text-muted">Give a fancy name for your Favorite place</small>
+            </div>
+            <div class="form-group">
+            <label for="image">Your Campground Image</label>
+            <input type="text" class="form-control" name="image" id="image" aria-describedby="URl image" placeholder="Url to your image">
+            <small id="URl image" class="form-text text-muted">Extenal link to your campground picture.</small>
+            </div>
+            <div class="form-group">
+            <label for="description">Add your Campground description</label>
+            <textarea class='form-control' name="description" id="description" rows="5" aria-describedby="Description" placeholder="Be as drescriptive as possible"></textarea>
+            <small id="description" class="form-text text-muted">Make your place special with a good description.</small>
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div >
+</div>
+
+
+
+<% include ../partials/footer %>
