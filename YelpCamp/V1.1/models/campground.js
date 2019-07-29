@@ -1,13 +1,14 @@
-const mongoose = require('mongoose')
+const Schema = require('mongoose').Schema;
+const model = require('mongoose').model;
 const commentSchema = require('./comment').commentSchema
 
 // console.log(comment.commentSchema)
 
-var campgroundSchema = new mongoose.Schema({
+var campgroundSchema = Schema({
     name: String,
     imgUrl: String,
     description: String,
     comments:[commentSchema]
     });
 
-module.exports = mongoose.model('Campground', campgroundSchema);
+module.exports = model('Campground', campgroundSchema);

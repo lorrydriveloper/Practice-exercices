@@ -1,12 +1,14 @@
-const mongoose = require('mongoose');
+const Schema = require('mongoose').Schema;
+const model = require('mongoose').model;
 
-const commentSchema = mongoose.Schema({
+
+const commentSchema = Schema({
     text: String,
     author: String
 });
 
 module.exports = { 
-    model: mongoose.model('Comment', commentSchema),
+    model: model('Comment', commentSchema),
     commentSchema : commentSchema,
 
 };
