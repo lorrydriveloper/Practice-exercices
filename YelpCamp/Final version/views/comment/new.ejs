@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h2 class="text-center">Add a comments to <%= campground.name%></h2>
+    <div class='container_form'>
+        <form action="/campgrounds/<%=campground.id%>/comment" method="post">
+          <div class="form-group">
+            <label for="comment[text]">Add your comment</label>
+            <textarea class="form-control" name="comment[text]" id="comment" rows="5"></textarea>
+          </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div >
+</div>
+
+<script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'comment' );
+</script> 
+
+
+<% include ../partials/footer %>
