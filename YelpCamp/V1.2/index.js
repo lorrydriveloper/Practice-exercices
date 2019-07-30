@@ -38,6 +38,11 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
+
 
 app.get('/', (req, res)=>{
     res.render('home')
@@ -72,7 +77,7 @@ app.get('/campgrounds', (req, res)=>{
     
 });
 
-app.post('/campgrounds',(req, res)=>{
+app.post('/campgrounds',isLoggedIn,(req, res)=>{
     let newCamp = {
         name:req.body.name,
         imgUrl: req.body.image,
@@ -119,7 +124,7 @@ app.get('/campgrounds/:id/comment/new', isLoggedIn,(req, res) => {
     
 });
 
-app.post('/campgrounds/:id/comment', (req, res) => {
+app.post('/campgrounds/:id/comment',isLoggedIn, (req, res) => {
     Campground.findById(req.params.id,(err,campground)=>{
         if (err) {
             console.log(err);

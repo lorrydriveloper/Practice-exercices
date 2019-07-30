@@ -5,9 +5,11 @@
     <p class="lead">Our best selection of campgrounds </p>
     <hr class="my-2">
     <p>You can see our luxury campgrounds and add new spot if you know excelents ones</p>
+    <% if (currentUser) { %>
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="campgrounds/new" role="button">Add new campground</i></a>
     </p>
+    <% } %>
 </div>
 
 <div class="row">

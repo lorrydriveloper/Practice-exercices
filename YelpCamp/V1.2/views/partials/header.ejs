@@ -29,15 +29,23 @@
       </li>
     </ul>
     <ul class="navbar-nav mr-right">
-      <li class="nav-item ">
+    <% if (currentUser) { %>
+      <li class="nav-item">
+        <a class="nav-link" href="/account"><i class="fas fa-user-circle"></i> <%= currentUser.fullName %></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/logout">Sing-Out <i class="fas fa-sign-out-alt"></i></a>
+      </li>
+    <% } else { %>
+       <li class="nav-item ">
         <a class="nav-link" href="/login">Login <i class="fas fa-user"></i></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/register">Sing-Up <i class="fas fa-sign-in-alt"></i></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Sing-Out <i class="fas fa-sign-out-alt"></i></i></a>
-      </li>
+     <% } %>
+     
+     
     </ul>
 
 
