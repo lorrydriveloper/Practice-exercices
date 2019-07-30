@@ -17,7 +17,8 @@
                     <figcaption class="figure-caption text-right">9$/per night</figcaption>
                     <a href=""><h4><%= campground.name%></h4></a>
                     <blockquote class="blockquote">
-                    <p class="mb-0"><%=campground.description%></p>
+                    <p class="mb-0"><%-campground.description%></p>
+                    <footer class="blockquote-footer text-right">Created by <cite class='font-weight-bold' title="<%=campground.author.username%>"><%=campground.author.username%></cite></footer>
                     </blockquote>
                 </div>
           
@@ -29,8 +30,8 @@
                 <% campground.comments.forEach(comment => { %>
                      <div class="card border-dark bg-transparent m-1" >
                         <div class="card-body">
-                        <h5 class="card-title text-dark"><%= comment.author%><small class="float-right">created 10 days ago</small></h5>
-                        <p class="card-text"><%= comment.text%></p>
+                        <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right">created 10 days ago</small></h5>
+                        <p class="card-text"><%-comment.text%></p>
                     </div>
                     </div>
                 <% }); %>

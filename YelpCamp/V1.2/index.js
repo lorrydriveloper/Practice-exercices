@@ -9,7 +9,12 @@ const express = require('express'),
       User = require('./models/user'),
       seeDB = require('./seed')
 
-seeDB();
+// seeDB(); //seed database
+
+const isLoggedIn = require('./middleware').isLoggedIn;
+const authRoutes = require('./routes/auth');
+const campgroundRoutes = require('./routes/campgrounds');
+const commentsRoutes = require('./routes/comments');
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true }).
   catch(error => handleError(error));
@@ -44,151 +49,14 @@ app.use((req, res, next) => {
 });
 
 
+
 app.get('/', (req, res)=>{
     res.render('home')
 })
 
-app.get('/campgrounds', (req, res)=>{
-    let textTruncate = function(str, length, ending) {
-        if (str == undefined) {
-          return 'Upps not description ...Yet'
-        }
-        if (ending == null) {
-          ending = '...';
-        }
-        if (str.length > length) {
-          return str.substring(0, length - ending.length) + ending;
-        } else {
-          return str;
-        }
-      };
-
-    let context = {
-        textTruncate: textTruncate,
-    }  
-    Campground.find({}, (err, campgrounds)=>{
-        if (err) {
-            console.log(err);
-        } else {
-            context.listOfCampgrounds = campgrounds
-            res.render('campground/campgrounds',context);
-        }
-    })
-    
-});
-
-app.post('/campgrounds',isLoggedIn,(req, res)=>{
-    let newCamp = {
-        name:req.body.name,
-        imgUrl: req.body.image,
-        description: req.body.description
-    }
-    Campground.create(newCamp,err=>{
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/campgrounds')
-        }
-        
-    })
-    
-})
-
-app.get('/campgrounds/new', isLoggedIn,(req, res)=>{
-    res.render('campground/new')
-});
-
-app.get('/campgrounds/:id', (req, res) => {
-    
-    Campground.findById(req.params.id,(err, DB_response)=>{
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('campground/show',{campground:DB_response});
-        }
-    })
-    
-});
-
-app.get('/campgrounds/:id/comment/new', isLoggedIn,(req, res) => {
-    Campground.findById(req.params.id,(err,campground)=>{
-        if (err) {
-            console.log(err)
-            res.redirect('/campgrounds/:id/comment/new')
-        } else {
-            
-            res.render('comment/new',{campground:campground})
-        }
-    })
-    
-    
-});
-
-app.post('/campgrounds/:id/comment',isLoggedIn, (req, res) => {
-    Campground.findById(req.params.id,(err,campground)=>{
-        if (err) {
-            console.log(err);
-            res.redirect('/campground/' + req.params.id)
-        } else {
-            Comment.create(req.body.comment,(err,comment)=>{
-                if (err) {
-                    console.log(err)
-                } else {
-                    campground.comments.push(comment);
-                    campground.save();
-                    res.redirect('/campgrounds/' + req.params.id)
-
-                }
-            });
-        }
-    })
-});
-
-/////// AUTH ROUTES /////////
-
-app.get('/register', (req, res) => {
-    res.render('auth/register');
-});
-
-app.post('/register', (req, res) => {
-    let newUser =  {
-        username: req.body.username,
-        fullName: req.body.fullName
-    }
-    User.register(newUser ,req.body.password,(err, user)=>{
-            if (err) {
-                console.log(err)
-                return res.redirect('/register')
-            }
-            passport.authenticate('local')(req, res, ()=>{
-                res.redirect('/campgrounds')
-            });
-        });
-});
-
-app.get('/login', (req, res) => {
-    res.render('auth/login')
-});
-
-app.post('/login',passport.authenticate('local',{
-    successRedirect: '/campgrounds',
-    failureRedirect: '/login',
-}),(req, res) => {
-    
-});
-
-app.get('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/');
-});
-
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect('/login')
-
-}
+app.use(authRoutes);
+app.use('/campgrounds/:id/comment', commentsRoutes);
+app.use('/campgrounds', campgroundRoutes);
 
 app.listen(3000, ()=>{
     console.log('server running...');

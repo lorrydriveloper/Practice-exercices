@@ -5,19 +5,18 @@
     <div class='container_form'>
         <form action="/campgrounds/<%=campground.id%>/comment" method="post">
           <div class="form-group">
-            <label for="comment[author]">Author</label>
-            <input readonly value='<%= currentUser.username %>' type="text" name="comment[author]" id="comment[author]" class="form-control" placeholder="Author" aria-describedby="Author fo the comment">
-            <small id="Author fo the comment" class="text-muted">Your username or email</small>
-          </div>
-          <div class="form-group">
             <label for="comment[text]">Add your comment</label>
-            <textarea class="form-control" name="comment[text]" id="comment[text]" rows="3"></textarea>
+            <textarea class="form-control" name="comment[text]" id="comment" rows="5"></textarea>
           </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
     </div >
 </div>
 
+<script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'comment' );
+</script> 
 
 
 <% include ../partials/footer %>

@@ -27,38 +27,35 @@ function seedDB() {
         } else {
             console.log('remove campgrounds')
 
-             //add a few campgrounds
-            data.forEach(campground => {
-                Campground.create(campground,(err, campground)=>{
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log(`campground ${campground.name} created`)
+            //  //add a few campgrounds
+            // data.forEach(campground => {
+            //     Campground.create(campground,(err, campground)=>{
+            //         if (err) {
+            //             console.log(err)
+            //         } else {
+            //             console.log(`campground ${campground.name} created`)
 
-                        Comment.create(
-                            {
-                                text: 'probbb',
-                                author: 'Trump v2'
-                            }, (err, comment)=>{
-                                if (err) {
-                                    console.log(err)
-                                } else {
-                                    campground.comments.push(comment);
-                                    campground.save();
-                                    console.log('create comment')
-                                }
-                            }
-                        );
+            //             Comment.create(
+            //                 {
+            //                     text: 'probbb',
+            //                     author: 'Trump v2'
+            //                 }, (err, comment)=>{
+            //                     if (err) {
+            //                         console.log(err)
+            //                     } else {
+            //                         campground.comments.push(comment);
+            //                         campground.save();
+            //                         console.log('create comment')
+            //                     }
+            //                 }
+            //             );
 
-                    }
-                });
-            });
+            //         }
+            //     });
+            // });
         }
     });
    
-    
-
-    //add few comments
 }
 
 module.exports = seedDB;
