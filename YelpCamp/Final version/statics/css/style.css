@@ -29,3 +29,15 @@ figcaption{
     width: 100%
 }
  
+.ui.red.button{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.or::before{
+    box-shadow: 0px 0px 5px -2px black inset !important;
+}
+.comment{
+
+        font-size: 0.65rem !important;
+}

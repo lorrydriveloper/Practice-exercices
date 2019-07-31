@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h2 class="text-center">Edit Comment</h2>
+    <div class='container_form'>
+        <form action="<%=baseUrl%>/<%=comment.id%>/?_method=PUT" method="post">
+            <div class="form-group">
+            <label for="description">Update your comment</label>
+            <textarea class='form-control' name="text" id="description" rows="5" aria-describedby="Description" placeholder="Be as drescriptive as possible"><%= comment.text%></textarea>
+            <small id="description" class="form-text text-muted">Describe your experience</small>
+            </div>
+            
+            
+            <button type="submit" class="btn btn-outline-warning btn-block">Update</button>
+        </form>
+    </div >
+</div>
+
+<script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'description' );
+</script> 
+
+
+<% include ../partials/footer %>

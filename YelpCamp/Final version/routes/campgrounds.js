@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const middleware = require('../middleware');
 const Campground = require('../models/campground');
-const Comment = require('../models/comment').model;
+const Comment = require('../models/comment');
 
 router.get('/', (req, res) => {
     let textTruncate = function (str, length, ending) {
@@ -62,7 +62,7 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 
 router.get('/:id', (req, res) => {
 
-    Campground.findById(req.params.id, (err, DB_response) => {
+    Campground.findById(req.params.id).populate('comments').exec((err, DB_response) => {
         if (err) {
             console.log(err);
         } else {
@@ -72,7 +72,7 @@ router.get('/:id', (req, res) => {
 
 });
 
-router.get('/:id/edit', middleware.checkOwnership, (req, res) => {
+router.get('/:id/edit', (req, res) => {
     Campground.findById(req.params.id, (err, DB_response) => {
         if (err) {
             console.log(err);

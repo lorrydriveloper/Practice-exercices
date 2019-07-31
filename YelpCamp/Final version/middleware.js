@@ -1,3 +1,6 @@
+const Campground = require('./models/campground');
+
+
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -18,6 +21,8 @@ function checkOwnership(req, res, next) {
                 }
             }
         });
+    } else{
+        res.redirect('back')
     }
 
 }

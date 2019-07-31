@@ -1,10 +1,10 @@
 const router = require('express').Router({mergeParams: true});
-const isLoggedIn = require('../middleware').isLoggedIn;
-const Comment = require('../models/comment').model;
+const middleware = require('../middleware');
+const Comment = require('../models/comment');
 const Campground = require('../models/campground');
 
 
-router.get('/new', isLoggedIn,(req, res) => {
+router.get('/new', middleware.isLoggedIn,(req, res) => {
     Campground.findById(req.params.id,(err,campground)=>{
         if (err) {
             console.log(err)
@@ -18,7 +18,7 @@ router.get('/new', isLoggedIn,(req, res) => {
     
 });
 
-router.post('/',isLoggedIn, (req, res) => {
+router.post('/',middleware.isLoggedIn, (req, res) => {
     Campground.findById(req.params.id,(err,campground)=>{
         if (err) {
             console.log(err);
@@ -37,6 +37,27 @@ router.post('/',isLoggedIn, (req, res) => {
 
                 }
             });
+        }
+    })
+});
+
+router.get('/:id/edit', (req, res) => {
+    Comment.findById(req.params.id, (err, DB_response) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('comment/edit', { comment: DB_response, baseUrl: req.baseUrl });
+            
+        }
+    })
+});
+
+router.put('/:id', (req, res)=>{
+    Comment.findByIdAndUpdate(req.params.id, req.body, (err, comment)=>{
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect('/campgrounds')
         }
     })
 });

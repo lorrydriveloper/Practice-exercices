@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
             <label for="image">Your Campground Image</label>
-            <input value='<%= campground.imgUrl%>' type="text" class="form-control" name="image" id="image" aria-describedby="URl image" placeholder="Url to your image">
+            <input value='<%= campground.imgUrl%>' type="text" class="form-control" name="imgUrl" id="image" aria-describedby="URl image" placeholder="Url to your image">
             <small id="URl image" class="form-text text-muted">Extenal link to your campground picture.</small>
             </div>
             <div class="form-group">
@@ -23,10 +23,6 @@
             
             <button type="submit" class="btn btn-outline-warning btn-block">Update</button>
         </form>
-            <p class='lead text-center'>Or</p>
-        <form action="/campgrounds/<%=campground.id%>?_method=DELETE" method="post" style = 'display:inline;'>
-            <button type="submit" class="btn btn-outline-danger btn-block">Delete</button>
-       </form>
     </div >
 </div>
 

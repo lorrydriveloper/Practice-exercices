@@ -17,11 +17,18 @@
                     <figcaption class="figure-caption text-right">9$/per night</figcaption>
                     <a href=""><h4><%= campground.name%></h4></a>
 
-                    <%if (currentUser) {%>
-                        <% if (currentUser.id == campground.author.id) { %>
-                            <a href="/campgrounds/<%=campground.id%>/edit" class="btn btn-outline-warning">Update</a>
+                        <% if (currentUser && currentUser.id == campground.author.id) { %>
+                            <div class="ui buttons">
+                                <a href="/campgrounds/<%=campground.id%>/edit" class="ui inverted yellow button">Edit</a>
+                                <div class="or"></div>
+                                <form action="/campgrounds/<%=campground.id%>?_method=DELETE" method="post" style = 'display:inline;'>
+                                    <button class="ui red inverted button">Delete</button>
+                                </form>
+                               
+                            </div>
                        <% } %>
-                    <% } %>
+
+
 
                     
                     <blockquote class="blockquote">
@@ -38,9 +45,16 @@
                 <% campground.comments.forEach(comment => { %>
                      <div class="card border-dark bg-transparent m-1" >
                         <div class="card-body">
-                        <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right">created 10 days ago</small></h5>
-                        <p class="card-text"><%-comment.text%></p>
-                    </div>
+                            <div class="ui buttons">
+                                <a href="/campgrounds/<%=campground.id%>/comment/<%=comment.id%>/edit" class="ui yellow button comment">Edit</a>
+                                <div class="or comment"></div>
+                                <form style = 'display:inline;'>
+                                    <button class="ui red button comment">Delete</button>
+                                </form>
+                            </div>
+                            <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right">created 10 days ago</small></h5>
+                            <p class="card-text"><%-comment.text%></p>
+                        </div>
                     </div>
                 <% }); %>
                
