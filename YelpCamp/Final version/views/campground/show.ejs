@@ -49,7 +49,7 @@
                             <div class="ui buttons">
                                 <a href="/campgrounds/<%=campground.id%>/comment/<%=comment.id%>/edit" class="ui yellow button comment">Edit</a>
                                 <div class="or comment"></div>
-                                <form style = 'display:inline;'>
+                                <form action="/campgrounds/<%=campground.id%>/comment/<%=comment.id%>?_method=DELETE" method='POST' style = 'display:inline;'>
                                     <button class="ui red button comment">Delete</button>
                                 </form>
                             </div>    

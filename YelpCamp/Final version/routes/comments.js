@@ -57,9 +57,17 @@ router.put('/:id', (req, res)=>{
         if (err) {
             console.log(err)
         } else {
-            res.redirect('/campgrounds')
+            res.redirect(req.baseUrl.replace('/comment',''))
         }
     })
+});
+router.delete('/:id', (req, res)=>{
+    Comment.findByIdAndDelete(req.params.id, (err)=>{
+        if (err) {
+            console.log(err);
+        }
+        res.redirect(req.baseUrl.replace('/comment',''))
+    });
 });
 
 module.exports = router;
