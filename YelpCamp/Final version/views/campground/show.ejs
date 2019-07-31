@@ -45,13 +45,16 @@
                 <% campground.comments.forEach(comment => { %>
                      <div class="card border-dark bg-transparent m-1" >
                         <div class="card-body">
+                        <% if (currentUser && currentUser.id == campground.author.id) { %>
                             <div class="ui buttons">
                                 <a href="/campgrounds/<%=campground.id%>/comment/<%=comment.id%>/edit" class="ui yellow button comment">Edit</a>
                                 <div class="or comment"></div>
                                 <form style = 'display:inline;'>
                                     <button class="ui red button comment">Delete</button>
                                 </form>
-                            </div>
+                            </div>    
+                        <% } %>        
+                            
                             <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right">created 10 days ago</small></h5>
                             <p class="card-text"><%-comment.text%></p>
                         </div>
