@@ -41,8 +41,9 @@ router.post('/',middleware.isLoggedIn, (req, res) => {
     })
 });
 
-router.get('/:id/edit', middleware.checkOwnershipComment, (req, res) => {
-    Comment.findById(req.params.id, (err, DB_response) => {
+router.get('/:comment_id/edit', middleware.checkOwnershipComment, (req, res) => {
+    console.log(req.params)
+    Comment.findById(req.params.comment_id, (err, DB_response) => {
         if (err) {
             console.log(err);
         } else {
@@ -52,8 +53,8 @@ router.get('/:id/edit', middleware.checkOwnershipComment, (req, res) => {
     })
 });
 
-router.put('/:id', middleware.checkOwnershipComment, (req, res)=>{
-    Comment.findByIdAndUpdate(req.params.id, req.body, (err, comment)=>{
+router.put('/:comment_id', middleware.checkOwnershipComment, (req, res)=>{
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body, (err, comment)=>{
         if (err) {
             console.log(err)
         } else {
@@ -61,8 +62,8 @@ router.put('/:id', middleware.checkOwnershipComment, (req, res)=>{
         }
     })
 });
-router.delete('/:id', middleware.checkOwnershipComment, (req, res)=>{
-    Comment.findByIdAndDelete(req.params.id, (err)=>{
+router.delete('/:comment_id', middleware.checkOwnershipComment, (req, res)=>{
+    Comment.findByIdAndDelete(req.params.comment_id, (err)=>{
         if (err) {
             console.log(err);
         }

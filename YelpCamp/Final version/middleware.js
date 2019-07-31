@@ -31,7 +31,7 @@ function checkOwnership(req, res, next) {
 
 function checkOwnershipComment(req, res, next) {
     if (req.isAuthenticated()) {
-        Comment.findById(req.params.id, (err, DB_response) => {
+        Comment.findById(req.params.comment_id, (err, DB_response) => {
             if (err) {
                 res.redirect('back')
             } else {
