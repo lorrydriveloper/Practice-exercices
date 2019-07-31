@@ -45,7 +45,7 @@
                 <% campground.comments.forEach(comment => { %>
                      <div class="card border-dark bg-transparent m-1" >
                         <div class="card-body">
-                        <% if (currentUser && currentUser.id == campground.author.id) { %>
+                        <% if (currentUser && currentUser.id == comment.author.id) { %>
                             <div class="ui buttons">
                                 <a href="/campgrounds/<%=campground.id%>/comment/<%=comment.id%>/edit" class="ui yellow button comment">Edit</a>
                                 <div class="or comment"></div>
