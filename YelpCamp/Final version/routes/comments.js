@@ -41,7 +41,7 @@ router.post('/',middleware.isLoggedIn, (req, res) => {
     })
 });
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', middleware.checkOwnershipComment, (req, res) => {
     Comment.findById(req.params.id, (err, DB_response) => {
         if (err) {
             console.log(err);
@@ -52,7 +52,7 @@ router.get('/:id/edit', (req, res) => {
     })
 });
 
-router.put('/:id', (req, res)=>{
+router.put('/:id', middleware.checkOwnershipComment, (req, res)=>{
     Comment.findByIdAndUpdate(req.params.id, req.body, (err, comment)=>{
         if (err) {
             console.log(err)
@@ -61,7 +61,7 @@ router.put('/:id', (req, res)=>{
         }
     })
 });
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', middleware.checkOwnershipComment, (req, res)=>{
     Comment.findByIdAndDelete(req.params.id, (err)=>{
         if (err) {
             console.log(err);
