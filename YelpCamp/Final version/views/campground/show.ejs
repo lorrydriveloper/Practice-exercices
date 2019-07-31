@@ -16,6 +16,14 @@
                 <div class="container-fluid">
                     <figcaption class="figure-caption text-right">9$/per night</figcaption>
                     <a href=""><h4><%= campground.name%></h4></a>
+
+                    <%if (currentUser) {%>
+                        <% if (currentUser.id == campground.author.id) { %>
+                            <a href="/campgrounds/<%=campground.id%>/edit" class="btn btn-outline-warning">Update</a>
+                       <% } %>
+                    <% } %>
+
+                    
                     <blockquote class="blockquote">
                     <p class="mb-0"><%-campground.description%></p>
                     <footer class="blockquote-footer text-right">Created by <cite class='font-weight-bold' title="<%=campground.author.username%>"><%=campground.author.username%></cite></footer>
