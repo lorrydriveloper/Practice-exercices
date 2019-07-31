@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
             return res.redirect('/register')
         }
         passport.authenticate('local')(req, res, () => {
-            res.redirect('back')
+            res.redirect('/campgrounds')
         });
     });
 });
