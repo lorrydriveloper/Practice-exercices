@@ -71,7 +71,7 @@ router.get('/:id', (req, res) => {
 
 });
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', middleware.checkOwnership, (req, res) => {
     Campground.findById(req.params.id, (err, DB_response) => {
         if (err) {
             console.log(err);

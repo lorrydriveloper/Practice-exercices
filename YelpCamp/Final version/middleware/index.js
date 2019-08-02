@@ -7,24 +7,29 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login')
+    req.flash('error', 'You need to be logged to do that!!');
+    res.redirect('/login');
 
 }
+
 function checkOwnership(req, res, next) {
     if (req.isAuthenticated()) {
         Campground.findById(req.params.id, (err, DB_response) => {
             if (err) {
+                req.flash('error','Campground not found!!');
                 res.redirect('back')
             } else {
                 if (DB_response.author.id.equals(req.user.id)) {
                     next()
                 } else {
+                    req.flash('error','You do not have permission to that!!');
                     res.redirect('back')
                 }
             }
         });
     } else{
-        res.redirect('back')
+        req.flash('error', 'You need to be login to do that!!');
+        res.redirect('/login');
     }
 
 }
