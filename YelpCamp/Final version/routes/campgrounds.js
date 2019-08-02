@@ -42,7 +42,8 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
         author: {
             id: req.user.id,
             username: req.user.username
-        }
+        },
+        price: req.body.price
     }
     Campground.create(newCamp, (err, campground) => {
         if (err) {

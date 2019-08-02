@@ -14,7 +14,14 @@
             <div class="img-thumbnail">
                 <img src="<%= campground.imgUrl%>" class="img-fluid rounded-top" alt="">
                 <div class="container-fluid">
-                    <figcaption class="figure-caption text-right">9$/per night</figcaption>
+                    <figcaption class="figure-caption text-right">
+                    <%if(campground.price){%>
+                        <%=campground.price%>$/per night
+                    <%}else{%>
+                        9$/per night
+                   <% }%>
+                    
+                    </figcaption>
                     <a href=""><h4><%= campground.name%></h4></a>
 
                         <% if (currentUser && currentUser.id == campground.author.id) { %>

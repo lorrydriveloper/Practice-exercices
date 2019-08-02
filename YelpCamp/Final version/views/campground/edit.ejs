@@ -15,6 +15,11 @@
             <small id="URl image" class="form-text text-muted">Extenal link to your campground picture.</small>
             </div>
             <div class="form-group">
+              <label for="price">Price</label>
+              <input value= '<%= campground.price%>' type="number" step="0.01" name="price" id="price" class="form-control" placeholder="" aria-describedby="price per night">
+              <small id="price per night" class="text-muted">Price per night in $</small>
+            </div>
+            <div class="form-group">
             <label for="description">Add your Campground description</label>
             <textarea class='form-control' name="description" id="description" rows="5" aria-describedby="Description" placeholder="Be as drescriptive as possible"><%= campground.description%></textarea>
             <small id="description" class="form-text text-muted">Make your place special with a good description.</small>

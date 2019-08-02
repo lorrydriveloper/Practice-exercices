@@ -20,7 +20,8 @@ var campgroundSchema = new mongoose.Schema({
         },
         username: String
 
-    }
+    },
+    price: Number
 },{timestamps:true});
 
 module.exports = mongoose.model('Campground', campgroundSchema);
