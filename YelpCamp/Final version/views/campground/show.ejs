@@ -40,7 +40,7 @@
                     
                     <blockquote class="blockquote">
                     <p class="mb-0"><%-campground.description%></p>
-                    <footer class="blockquote-footer text-right">Created by <cite class='font-weight-bold' title="<%=campground.author.username%>"><%=campground.author.username%></cite></footer>
+                    <footer class="blockquote-footer text-right">Created by <cite class='font-weight-bold' title="<%=campground.author.username%>"><%=campground.author.username%></cite>, <%= moment(campground.createdAt).fromNow() %></footer>
                     </blockquote>
                 </div>
           
@@ -61,8 +61,7 @@
                                 </form>
                             </div>    
                         <% } %>        
-                            
-                            <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right">created 10 days ago</small></h5>
+                            <h5 class="card-title text-dark"><%= comment.author.username%><small class="float-right"><%= moment(comment.createdAt).fromNow() %></small></h5>
                             <p class="card-text"><%-comment.text%></p>
                         </div>
                     </div>
