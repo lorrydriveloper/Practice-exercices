@@ -10,6 +10,10 @@
             <small id="Name of campGround" class="form-text text-muted">Give a fancy name for your Favorite place</small>
             </div>
             <div class="form-group">
+                <label for="location">Location</label>
+                <input class="form-control" type="text" name="location" id="location" value="<%= campground.location %>">
+            </div>
+            <div class="form-group">
             <label for="image">Your Campground Image</label>
             <input value='<%= campground.imgUrl%>' type="text" class="form-control" name="imgUrl" id="image" aria-describedby="URl image" placeholder="Url to your image">
             <small id="URl image" class="form-text text-muted">Extenal link to your campground picture.</small>

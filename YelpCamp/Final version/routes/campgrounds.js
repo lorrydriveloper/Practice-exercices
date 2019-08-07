@@ -2,6 +2,15 @@ const router = require('express').Router();
 const middleware = require('../middleware');
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
+var NodeGeocoder = require('node-geocoder')
+ 
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+var geocoder = NodeGeocoder(options);
 
 router.get('/', (req, res) => {
     let textTruncate = function (str, length, ending) {
@@ -35,25 +44,39 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
-    let newCamp = {
-        name: req.body.name,
-        imgUrl: req.body.image,
-        description: req.body.description,
-        author: {
-            id: req.user.id,
-            username: req.user.username
-        },
-        price: req.body.price
-    }
-    Campground.create(newCamp, (err, campground) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/campgrounds');
+    geocoder.geocode(req.body.location, function (err, data) {
+        if (err || !data.length) {
+            console.log(err)
+          req.flash('error', 'Invalid address');
+          return res.redirect('back');
         }
+        var lat = data[0].latitude;
+        var lng = data[0].longitude;
+        var location = data[0].formattedAddress;
+   
+
+        let newCamp = {
+            name: req.body.name,
+            imgUrl: req.body.image,
+            description: req.body.description,
+            author: {
+                id: req.user.id,
+                username: req.user.username
+            },
+            price: req.body.price,
+            location: location,
+            lng : lng,
+            lat: lat
+        }
+        Campground.create(newCamp, (err, campground) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/campgrounds');
+            }
 
     });
-
+});
 
 });
 router.get('/new', middleware.isLoggedIn, (req, res) => {
@@ -83,15 +106,23 @@ router.get('/:id/edit', middleware.checkOwnership, (req, res) => {
 });
 
 router.put('/:id', middleware.checkOwnership, (req, res) => {
-    Campground.findByIdAndUpdate(req.params.id, req.body, (err, DB_response) => {
-        if (err) {
-            console.log(err)
-            res.redirect('campgrounds')
-        } else {
-            res.redirect('/campgrounds/' + req.params.id)
+    geocoder.geocode(req.body.location, function (err, data) {
+        if (err || !data.length) {
+          req.flash('error', 'Invalid address');
+          return res.redirect('back');
         }
-    })
-
+        req.body.lat = data[0].latitude;
+        req.body.lng = data[0].longitude;
+        req.body.location = data[0].formattedAddress;
+        Campground.findByIdAndUpdate(req.params.id, req.body, (err, DB_response) => {
+            if (err) {
+                console.log(err)
+                res.redirect('campgrounds')
+            } else {
+                res.redirect('/campgrounds/' + req.params.id)
+            }
+        })
+    });
 });
 
 router.delete('/:id', middleware.checkOwnership, (req, res) => {
@@ -110,5 +141,7 @@ router.delete('/:id', middleware.checkOwnership, (req, res) => {
         }
     })
 });
+
+
 
 module.exports = router;

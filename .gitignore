@@ -1,3 +1,4 @@
 node_modules
 YelpCamp/mongo.bat
 Scrapbook-1.mongo
+.env
