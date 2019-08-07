@@ -1,31 +1,41 @@
 <% include ../partials/header %>
 <div class="container">
     <div class="jumbotron">
-    <h1 class="display-3"> <i class="fas fa-campground    "></i> CampGrounds</h1>
-    <p class="lead">Our best selection of campgrounds </p>
-    <hr class="my-2">
-    <p>You can see our luxury campgrounds and add new spot if you know excelents ones</p>
-    <% if (currentUser) { %>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="campgrounds/new" role="button">Add new campground</i></a>
-    </p>
-    <% } %>
-</div>
+        <h1 class="display-3"> <i class="fas fa-campground    "></i> CampGrounds</h1>
+        <p class="lead">Our best selection of campgrounds </p>
+        <hr class="my-2">
+        <p>You can see our luxury campgrounds and add new spot if you know excelents ones</p>
+        <% if (currentUser) { %>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="campgrounds/new" role="button">Add new campground</i></a>
+        </p>
+        <% } %>
+        <p>
+            <div>
+                <form action="/campgrounds" method="get">
+                    <input type="search" name="search" id="search" placeholder='Search Campground...'>
+                    <button class="circular medium teal ui icon button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </p>
+    </div>
 
-<div class="row">
-    <% listOfCampgrounds.forEach(campground => { %>
-    <div class="col-lg-4 col-sm-6">
-        <div class="card ">
-            <img class="card-img-top" src="<%= campground.imgUrl %>" alt="CampGround image">
-            <div class="card-body text-center">
-                <h4 class="card-title"><%= campground.name%></h4>
-                <p class="card-text"><%- textTruncate(campground.description,50)%></p>
-                <a href="/campgrounds/<%=campground.id%>" class="btn btn-primary">Visit Campground Page</a>
+    <div class="row">
+        <% listOfCampgrounds.forEach(campground => { %>
+        <div class="col-lg-4 col-sm-6">
+            <div class="card ">
+                <img class="card-img-top" src="<%= campground.imgUrl %>" alt="CampGround image">
+                <div class="card-body text-center">
+                    <h4 class="card-title"><%= campground.name%></h4>
+                    <p class="card-text"><%- textTruncate(campground.description,50)%></p>
+                    <a href="/campgrounds/<%=campground.id%>" class="btn btn-primary">Visit Campground Page</a>
+                </div>
             </div>
         </div>
+    <%});%>
     </div>
-<%});%>
-</div>
 </div>
 
 <% include ../partials/footer %>

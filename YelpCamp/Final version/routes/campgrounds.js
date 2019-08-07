@@ -14,7 +14,7 @@ var geocoder = NodeGeocoder(options);
 
 router.get('/', (req, res) => {
     let textTruncate = function (str, length, ending) {
-        ///prevent hmtl to show in truncate text///
+        ///prevent see html in truncate text///
         str = str.replace(/<\/?[^>]+(>|$)/g, "");
         if (str == undefined) {
             return 'Upps not description ...Yet'
@@ -32,14 +32,31 @@ router.get('/', (req, res) => {
     let context = {
         textTruncate: textTruncate,
     }
-    Campground.find({}, (err, campgrounds) => {
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Campground.find({name: regex}, (err, campgrounds) => {
+            if (err) {
+                console.log(err);
+            } else if(campgrounds.length == 0){
+                req.flash('error', 'No campgrounds matches');
+                res.redirect('/campgrounds');
+            }
+            else {
+                context.listOfCampgrounds = campgrounds
+                res.render('campground/campgrounds', context);
+            }
+        });
+    } else {
+        Campground.find({}, (err, campgrounds) => {
         if (err) {
             console.log(err);
         } else {
             context.listOfCampgrounds = campgrounds
             res.render('campground/campgrounds', context);
         }
-    })
+        });
+    }
+    
 
 });
 
@@ -143,5 +160,8 @@ router.delete('/:id', middleware.checkOwnership, (req, res) => {
 });
 
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
